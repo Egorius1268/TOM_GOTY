@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50e578e77b5639c4680387985c5f5027, type: 3}
+  m_Name: Speeder
+  m_EditorClassIdentifier: 
+  name: 
+  icon: {fileID: 0}
+  cost: 50
+  damage: 2
+  range: 25
+  fireRate: 3
+  prefab: {fileID: 8075602802070930470, guid: eeeb2f577b272dd4b935c9828ba2ede7, type: 3}
+  bulletPrefab: {fileID: 5764272997128909184, guid: 2e607f266c98d034ca09ef33a6ff5fd4, type: 3}
