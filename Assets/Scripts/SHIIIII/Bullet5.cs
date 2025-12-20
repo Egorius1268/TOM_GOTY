@@ -227,7 +227,7 @@ public class Bullet5 : MonoBehaviour
     
     private void ApplyChainEffect(GameObject initialTarget)
     {
-        // Находим ближайших врагов для цепной реакции
+        
         Collider2D[] nearbyEnemies = Physics2D.OverlapCircleAll(
             initialTarget.transform.position, 
             3f, 
@@ -259,8 +259,8 @@ public class Bullet5 : MonoBehaviour
         EnemyMovement enemyMovement = target.GetComponent<EnemyMovement>();
         if (enemyMovement != null)
         {
-            // Яд наносит урон со временем
-            enemyMovement.ApplyPoisonEffect(baseDamage * 0.3f, 5f); // 30% урона в течение 5 секунд
+            
+            enemyMovement.ApplyPoisonEffect(baseDamage * 0.3f, 5f); // 30% урона ядом в течение 5 секунд
         }
     }
     
@@ -294,7 +294,7 @@ public class Bullet5 : MonoBehaviour
         }
         else
         {
-            // если пул не назначен - деактивируем
+           
             gameObject.SetActive(false);
         }
     }

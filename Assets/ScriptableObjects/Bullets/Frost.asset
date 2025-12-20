@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a166e7cac2ef134b8e5ca4b73a4dc2b, type: 3}
   m_Name: Frost
   m_EditorClassIdentifier: 
-  state: 0
-  bulletColor: {r: 1, g: 1, b: 1, a: 1}
-  bulletSprite: {fileID: 0}
+  state: 2
+  bulletColor: {r: 0, g: 0.48483276, b: 1, a: 1}
+  bulletSprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   damageMultiplier: 1
   hasBurnEffect: 0
   burnDamagePerSecond: 2
   burnDuration: 3
-  hasSlowEffect: 0
+  hasSlowEffect: 1
   slowPercentage: 0.5
   slowDuration: 2
   hasChainEffect: 0
