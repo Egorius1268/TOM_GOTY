@@ -17,6 +17,7 @@ public class BuildManager : MonoBehaviour
 
     private Camera mainCam;
     private TurretData selectedTurret;
+    private bool isInputBlocked = false;
 
     private void Awake()
     {
@@ -33,8 +34,11 @@ public class BuildManager : MonoBehaviour
         DeselectTurret(); // начало без выбора
     }
 
+    
+
     private void Update()
     {
+        if (isInputBlocked) return;
         if (selectedTurret == null) return;
 
         if (Input.GetMouseButtonDown(0))
@@ -46,7 +50,17 @@ public class BuildManager : MonoBehaviour
             DeselectTurret();
         }
     }
+    
+    public void BlockInput(bool block)
+    {
+        isInputBlocked = block;
 
+        if (block)
+        {
+            DeselectTurret(); 
+            Debug.Log("BuildManager input blocked");
+        }
+    }
     public void SelectTurret(TurretData turret)
     {
         selectedTurret = turret;

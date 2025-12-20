@@ -13,6 +13,15 @@ public class EnemyMovement : MonoBehaviour
     private float moveSpeed;
     [SerializeField] private float waypointThreshold = 0.1f; 
     
+    [Header("Status Effects")]
+    private bool isBurning = false;
+    private bool isSlowed = false;
+    private bool isPoisoned = false;
+    private float originalMoveSpeed;
+    private Coroutine burnCoroutine;
+    private Coroutine slowCoroutine;
+    private Coroutine poisonCoroutine;
+    
     private Transform target;
     private int pathIndex = 0;
     
@@ -21,6 +30,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void Start()
     {
+        
         gameManager = FindObjectOfType<GameManager>();
         if (gameManager == null) 
             Debug.LogError("No GameManager in scene!");
@@ -39,6 +49,7 @@ public class EnemyMovement : MonoBehaviour
         {
             Debug.LogError("LevelManager or path not found");
         }
+        originalMoveSpeed = moveSpeed;
     }
 
     private void Update()
@@ -97,5 +108,114 @@ public class EnemyMovement : MonoBehaviour
         EnemySpawner.onEnemyDestroy.Invoke();
         Destroy(gameObject);
     }
+    
+    
+    public void ApplyBurnEffect(float damagePerSecond, float duration)
+    {
+        if (burnCoroutine != null)
+            StopCoroutine(burnCoroutine);
+            
+        burnCoroutine = StartCoroutine(BurnEffect(damagePerSecond, duration));
+    }
+    
+    private IEnumerator BurnEffect(float dps, float duration)
+    {
+        isBurning = true;
+        float elapsed = 0f;
+        
+        // Визуальный эффект горения
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        Color originalColor = sr.color;
+        sr.color = Color.red;
+        
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            
+            if (enemyData != null)
+            {
+                Health health = GetComponent<Health>();
+                if (health != null)
+                {
+                    health.TakeDamage((int)(dps * Time.deltaTime));
+                }
+            }
+            
+            // Мерцающий эффект
+            float alpha = Mathf.PingPong(Time.time * 10f, 0.3f) + 0.7f;
+            sr.color = new Color(1f, alpha * 0.3f, alpha * 0.3f, 1f);
+            
+            yield return null;
+        }
+        
+        sr.color = originalColor;
+        isBurning = false;
+        burnCoroutine = null;
+    }
+    
+    public void ApplySlowEffect(float slowPercentage, float duration)
+    {
+        if (slowCoroutine != null)
+            StopCoroutine(slowCoroutine);
+            
+        slowCoroutine = StartCoroutine(SlowEffect(slowPercentage, duration));
+    }
+    
+    private IEnumerator SlowEffect(float slowPercent, float duration)
+    {
+        isSlowed = true;
+        moveSpeed = originalMoveSpeed * (1f - slowPercent); // Замедляем
+        
+        // Визуальный эффект заморозки
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        Color originalColor = sr.color;
+        sr.color = Color.cyan;
+        
+        yield return new WaitForSeconds(duration);
+        
+        sr.color = originalColor;
+        moveSpeed = originalMoveSpeed;
+        isSlowed = false;
+        slowCoroutine = null;
+    }
+    
+    public void ApplyPoisonEffect(float totalDamage, float duration)
+    {
+        if (poisonCoroutine != null)
+            StopCoroutine(poisonCoroutine);
+            
+        poisonCoroutine = StartCoroutine(PoisonEffect(totalDamage, duration));
+    }
+    
+    private IEnumerator PoisonEffect(float totalDamage, float duration)
+    {
+        isPoisoned = true;
+        float damagePerTick = totalDamage / (duration / 0.5f); // Урон каждые 0.5 секунды
+        int ticks = Mathf.FloorToInt(duration / 0.5f);
+        
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        Color originalColor = sr.color;
+        sr.color = Color.green;
+        
+        for (int i = 0; i < ticks; i++)
+        {
+            Health health = GetComponent<Health>();
+            if (health != null)
+            {
+                health.TakeDamage((int)damagePerTick);
+            }
+            
+            // Мерцание
+            sr.color = i % 2 == 0 ? Color.green : new Color(0, 0.7f, 0, 1);
+            
+            yield return new WaitForSeconds(0.5f);
+        }
+        
+        sr.color = originalColor;
+        isPoisoned = false;
+        poisonCoroutine = null;
+    }
+    
+    
     
 }

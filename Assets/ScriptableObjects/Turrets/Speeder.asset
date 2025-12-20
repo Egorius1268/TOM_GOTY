@@ -16,7 +16,7 @@ MonoBehaviour:
   icon: {fileID: 0}
   cost: 50
   damage: 2
-  range: 25
-  fireRate: 3
+  range: 2.06
+  fireRate: 4.56
   prefab: {fileID: 8075602802070930470, guid: eeeb2f577b272dd4b935c9828ba2ede7, type: 3}
   bulletPrefab: {fileID: 5764272997128909184, guid: 2e607f266c98d034ca09ef33a6ff5fd4, type: 3}

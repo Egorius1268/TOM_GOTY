@@ -104,7 +104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 1697822237746919015}
   bulletSpeed: 5
-  lifeTime: 0
+  lifeTime: 5
   pool: {fileID: 0}
 --- !u!58 &4436693034050667729
 CircleCollider2D:

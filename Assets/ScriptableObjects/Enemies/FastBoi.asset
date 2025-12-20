@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: FastBoi
   m_EditorClassIdentifier: 
   enemyName: Fast Boi
-  moveSpeed: 3.22
-  maxHealth: 100
+  moveSpeed: 2.89
+  maxHealth: 25
   damageToPlayer: 5
   moneyReward: 11
   prefab: {fileID: 577963078636758581, guid: 9169b43af0b37be478301f933f62247c, type: 3}

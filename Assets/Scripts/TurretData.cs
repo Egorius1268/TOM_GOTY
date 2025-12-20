@@ -12,8 +12,12 @@ public class TurretData : ScriptableObject
     public float damage;
     public float range;
     public float fireRate; // bullets per second
-
+    
+    [Header("Bullet Type")]
+    public BulletType bulletType; // ScriptableObject с типом пули
+    public GameObject bulletPrefab; // Базовый префаб пули
+    
     [Header("Visual")]
     public GameObject prefab; 
-    public GameObject bulletPrefab; 
+     
 }

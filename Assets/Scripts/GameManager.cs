@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,10 +9,20 @@ public class GameManager : MonoBehaviour
     
     public TMP_Text moneyDisp;
     public TMP_Text hpDisp;
+    public GameObject deathPanel;
+    public GameObject buildPanel;
+    public GameObject hpAndCurrencyPanel;
+    public static BuildManager Instance;
     public int startingPlayerHP = 100;
     public int PlayerHP;
     public int startMoney;
     public int moneyAmount = 0;
+    public bool isGameOver = false;
+
+    private void Awake()
+    {
+        Time.timeScale = 1f;
+    }
 
     private void Start()
     {
@@ -44,8 +55,7 @@ public class GameManager : MonoBehaviour
             
                 if (PlayerHP <= 0)
                 {
-                    Debug.Log("Игра окончена");
-                    // добавить логику завершения игры
+                    GameOver();
                 }
         }
     }
@@ -59,5 +69,25 @@ public class GameManager : MonoBehaviour
     public bool CanAfford(int cost)
     {
         return moneyAmount >= cost;
+    }
+
+    private void GameOver()
+    {
+        isGameOver = true;
+        
+        
+        Time.timeScale = 0f;
+
+        
+        if (deathPanel != null)
+        {
+            BuildManager.Instance.BlockInput(true);
+            deathPanel.SetActive(true);
+            buildPanel.SetActive(false);
+            hpAndCurrencyPanel.SetActive(false);
+            // StartCoroutine(ShowDeathPanel());
+        } 
+        
+        
     }
 }
