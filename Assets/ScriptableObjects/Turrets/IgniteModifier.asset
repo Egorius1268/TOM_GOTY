@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50e578e77b5639c4680387985c5f5027, type: 3}
-  m_Name: Speeder
+  m_Name: IgniteModifier
   m_EditorClassIdentifier: 
   name: 
   icon: {fileID: 0}
-  cost: 50
-  damage: 1
-  range: 3.67
-  fireRate: 4
-  bulletType: {fileID: 11400000, guid: 34110c14567b05d448ae7f3112504cae, type: 2}
-  bulletPrefab: {fileID: 5764272997128909184, guid: 2e607f266c98d034ca09ef33a6ff5fd4, type: 3}
-  prefab: {fileID: 8075602802070930470, guid: eeeb2f577b272dd4b935c9828ba2ede7, type: 3}
+  cost: 0
+  damage: 0
+  range: 0
+  fireRate: 0
+  bulletType: {fileID: 0}
+  bulletPrefab: {fileID: 0}
+  prefab: {fileID: 6413496514119043402, guid: c07058e0c9f70944aa544679e2595418, type: 3}

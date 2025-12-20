@@ -127,21 +127,31 @@ public class EnemyMovement : MonoBehaviour
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         Color originalColor = sr.color;
         sr.color = Color.red;
+        Health health = GetComponent<Health>();
+        if (health != null)
+        {
+            health.TakeDamage(Mathf.RoundToInt(dps * 0.5f)); 
+        }
         
+        float damageInterval = 1f; 
+        float nextDamageTime = damageInterval;
+    
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
+        
             
-            if (enemyData != null)
+            if (elapsed >= nextDamageTime)
             {
-                Health health = GetComponent<Health>();
                 if (health != null)
                 {
-                    health.TakeDamage((int)(dps * Time.deltaTime));
+                    int damageThisTick = Mathf.RoundToInt(dps);
+                    health.TakeDamage(damageThisTick);
+                    Debug.Log($"Burn tick: {damageThisTick} HP at {elapsed}s");
                 }
+                nextDamageTime += damageInterval;
             }
             
-            // Мерцающий эффект
             float alpha = Mathf.PingPong(Time.time * 10f, 0.3f) + 0.7f;
             sr.color = new Color(1f, alpha * 0.3f, alpha * 0.3f, 1f);
             
@@ -164,9 +174,9 @@ public class EnemyMovement : MonoBehaviour
     private IEnumerator SlowEffect(float slowPercent, float duration)
     {
         isSlowed = true;
-        moveSpeed = originalMoveSpeed * (1f - slowPercent); // Замедляем
+        moveSpeed = originalMoveSpeed * (1f - slowPercent); 
         
-        // Визуальный эффект заморозки
+       
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         Color originalColor = sr.color;
         sr.color = Color.cyan;
@@ -190,7 +200,7 @@ public class EnemyMovement : MonoBehaviour
     private IEnumerator PoisonEffect(float totalDamage, float duration)
     {
         isPoisoned = true;
-        float damagePerTick = totalDamage / (duration / 0.5f); // Урон каждые 0.5 секунды
+        float damagePerTick = totalDamage / (duration / 0.5f); 
         int ticks = Mathf.FloorToInt(duration / 0.5f);
         
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
@@ -205,7 +215,7 @@ public class EnemyMovement : MonoBehaviour
                 health.TakeDamage((int)damagePerTick);
             }
             
-            // Мерцание
+            
             sr.color = i % 2 == 0 ? Color.green : new Color(0, 0.7f, 0, 1);
             
             yield return new WaitForSeconds(0.5f);

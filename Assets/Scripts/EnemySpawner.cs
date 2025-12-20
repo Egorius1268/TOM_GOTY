@@ -2,31 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
 public class EnemySpawner : MonoBehaviour
 {
     [Header("Refereneces")]
     [SerializeField] private EnemyData[] enemyDatas;
-
+    
 
     [Header("Attributes")]
     [SerializeField] private int baseEnemies = 8;
     [SerializeField] private float enemiesPerSecond = 0.5f;
     [SerializeField] private float timeBetweenWaves = 5f;
     [SerializeField] private float difficultyScalingFactor = 0.75f;
+    [SerializeField] private int maxWaves = 4;
 
     [Header("Events")]
     public static UnityEvent onEnemyDestroy = new UnityEvent();
 
-    private int currentWave = 1;
+    
+    public int currentWave = 1;
+    public TMP_Text currentWaveText;
     private float timeSinceLastSpawn;
     private int enemiesAlive;
     private int enemiesLeftToSpawn;
     private bool isSpawning = false;
-
+    private bool levelCompleted = false;
+    
     private void Awake()
     {
         onEnemyDestroy.AddListener(EnemyDestroyed);
+        UpdateWaveDisplay();
     }
 
     private void Start()
@@ -36,7 +42,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        if (!isSpawning) return;
+        if (!isSpawning || levelCompleted) return;
         timeSinceLastSpawn += Time.deltaTime;
 
         if (timeSinceLastSpawn >= (1f / enemiesPerSecond) && enemiesLeftToSpawn > 0) {
@@ -65,9 +71,22 @@ public class EnemySpawner : MonoBehaviour
     private void EndWave() {
         isSpawning = false;
         timeSinceLastSpawn = 0f;
+        if (currentWave >= maxWaves && !levelCompleted)
+        {
+            levelCompleted = true;
+            GameManager gameManager = FindObjectOfType<GameManager>();
+            if (gameManager != null)
+            {
+                gameManager.CompleteLevel();
+            }
+            return;
+        }
         currentWave++;
+        UpdateWaveDisplay();
         StartCoroutine(StartWave());
     }
+    
+    
 
     private void SpawnEnemy()
     {
@@ -117,6 +136,11 @@ public class EnemySpawner : MonoBehaviour
         
         int randomIndex = Random.Range(0, enemyDatas.Length);
         return enemyDatas[randomIndex];
+    }
+    
+    private void UpdateWaveDisplay()
+    {
+        currentWaveText.text = currentWave.ToString();
     }
 
     private int EnemiesPerWave() { 

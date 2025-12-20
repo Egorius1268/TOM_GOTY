@@ -12,12 +12,14 @@ public class GameManager : MonoBehaviour
     public GameObject deathPanel;
     public GameObject buildPanel;
     public GameObject hpAndCurrencyPanel;
+    public GameObject levelCompletePanel;
     public static BuildManager Instance;
     public int startingPlayerHP = 100;
     public int PlayerHP;
     public int startMoney;
     public int moneyAmount = 0;
     public bool isGameOver = false;
+    public bool isLevelComplete = false;
 
     private void Awake()
     {
@@ -26,7 +28,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        
         AddMoney(startMoney);
         startHP();
         PlayerHP = 100;
@@ -87,7 +88,20 @@ public class GameManager : MonoBehaviour
             hpAndCurrencyPanel.SetActive(false);
             // StartCoroutine(ShowDeathPanel());
         } 
-        
-        
+    }
+
+    public void CompleteLevel()
+    {
+        if (isGameOver) return;
+        isLevelComplete = true;
+        Time.timeScale = 0f;
+        if (buildPanel != null) buildPanel.SetActive(false);
+        if (hpAndCurrencyPanel != null) hpAndCurrencyPanel.SetActive(false);
+
+        // Показываем панель победы (должна быть назначена в инспекторе)
+        if (levelCompletePanel != null)
+        {
+            levelCompletePanel.SetActive(true);
+        }
     }
 }

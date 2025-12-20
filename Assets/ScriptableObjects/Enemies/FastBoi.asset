@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FastBoi
   m_EditorClassIdentifier: 
   enemyName: Fast Boi
-  moveSpeed: 2.89
+  moveSpeed: 2.16
   maxHealth: 25
   damageToPlayer: 5
   moneyReward: 11

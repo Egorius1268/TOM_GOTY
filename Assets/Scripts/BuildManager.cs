@@ -10,6 +10,7 @@ public class BuildManager : MonoBehaviour
     [Header("References")]
     public Tilemap buildableTilemap; 
     public LayerMask buildableLayer; 
+    public LayerMask modifierBuildingLayer; 
     private GameManager gameManager;
 
     [Header("Turrets")]
@@ -80,13 +81,18 @@ public class BuildManager : MonoBehaviour
             return;
         }
         
+        
         Vector3 mouseWorldPos = mainCam.ScreenToWorldPoint(Input.mousePosition);
         mouseWorldPos.z = 0f; // важно для 2D
 
         
         Vector3Int cellPos = buildableTilemap.WorldToCell(mouseWorldPos);
 
-        
+        if (IsOverModifierBuilding(mouseWorldPos))
+        {
+            Debug.Log("Cannot build on modifier buildings!");
+            return;
+        }
         if (!buildableTilemap.HasTile(cellPos))
         {
             Debug.Log("Cannot build here: not on buildable terrain.");
@@ -109,19 +115,19 @@ public class BuildManager : MonoBehaviour
         gameManager.DeductMoney(selectedTurret.cost);
         
         // строительство
-        GameObject turretGO = Instantiate(selectedTurret.prefab, mouseWorldPos, Quaternion.identity);
+        GameObject newObject = Instantiate(selectedTurret.prefab, mouseWorldPos, Quaternion.identity);
         
-        Turret1 turretScript = turretGO.GetComponent<Turret1>();
+        Turret1 turretScript = newObject.GetComponent<Turret1>();
         
         if (turretScript != null)
         {
             turretScript.data = selectedTurret; // передаем данные с СО
             turretScript.InitializeFromData(); 
-            Debug.Log($"Built {selectedTurret.name} with damage: {selectedTurret.damage}");
+            Debug.Log($"Built turret: {selectedTurret.name}");
         }
         else
         {
-            Debug.LogError("Turret prefab doesn't have Turret1 component!");
+            Debug.Log($"Built non-turret object: {selectedTurret.name}");
         }
         if (!gameManager.CanAfford(selectedTurret.cost))
         {
@@ -139,6 +145,13 @@ public class BuildManager : MonoBehaviour
     {
         return EventSystem.current.IsPointerOverGameObject(); // указывает на ui а не на игровые объекты
     }
+    private bool IsOverModifierBuilding(Vector3 position)
+    {
+        // Проверяем пересечение со слоем модификаторов
+        Collider2D modifier = Physics2D.OverlapCircle(position, 0.3f, modifierBuildingLayer);
+        return modifier != null;
+    }
+    
     private void OnDrawGizmos()
     {
         if (!Application.isPlaying || selectedTurret == null || buildableTilemap == null) return;
