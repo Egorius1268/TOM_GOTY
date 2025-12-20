@@ -109,11 +109,11 @@ public class BuildManager : MonoBehaviour
         {
             Debug.LogError("Turret prefab doesn't have Turret1 component!");
         }
-        /*if (!gameManager.CanAfford(selectedTurret.cost))
+        if (!gameManager.CanAfford(selectedTurret.cost))
         {
             Debug.Log($"Not enough money! Need {selectedTurret.cost}");
             return;
-        }*/
+        }
         gameManager.DeductMoney(selectedTurret.cost); // вычет деняк
     }
     private bool CanAffordTurret()
