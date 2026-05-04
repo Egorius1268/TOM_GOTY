@@ -16,6 +16,11 @@ public class IngameSceneManager : MonoBehaviour
         }
     }
 
+    public void SelectSceneByIndex(int sceneIndex)
+    {
+        SceneManager.LoadScene(sceneIndex);
+        
+    }
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
