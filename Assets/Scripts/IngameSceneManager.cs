@@ -41,7 +41,11 @@ public class IngameSceneManager : MonoBehaviour
     {
         levelsPanel.SetActive(false);
     }
-    
+
+    public void NewGame()
+    {
+        PlayerPrefs.DeleteAll();
+    }
     
     public void QuitGame()
     {

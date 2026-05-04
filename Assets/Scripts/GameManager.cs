@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -91,8 +92,15 @@ public class GameManager : MonoBehaviour
     public void CompleteLevel()
     {
         if (isGameOver) return;
+        int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+        int currentIndex = SceneManager.GetActiveScene().buildIndex;
         isLevelComplete = true;
         Time.timeScale = 0f;
+        if (currentIndex > unlockedLevel)
+        {
+            PlayerPrefs.SetInt("UnlockedLevel", currentIndex);
+            PlayerPrefs.Save();
+        }
         if (buildPanel != null) buildPanel.SetActive(false);
         if (hpAndCurrencyPanel != null) hpAndCurrencyPanel.SetActive(false);
         if (levelCompletePanel != null)
@@ -100,4 +108,5 @@ public class GameManager : MonoBehaviour
             levelCompletePanel.SetActive(true);
         }
     }
+    
 }
