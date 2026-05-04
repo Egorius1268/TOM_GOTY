@@ -76,9 +76,7 @@ public class GameManager : MonoBehaviour
     {
         isGameOver = true;
         
-        
         Time.timeScale = 0f;
-
         
         if (deathPanel != null)
         {
@@ -97,8 +95,6 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         if (buildPanel != null) buildPanel.SetActive(false);
         if (hpAndCurrencyPanel != null) hpAndCurrencyPanel.SetActive(false);
-
-        // Показываем панель победы (должна быть назначена в инспекторе)
         if (levelCompletePanel != null)
         {
             levelCompletePanel.SetActive(true);

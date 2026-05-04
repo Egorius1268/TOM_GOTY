@@ -2,8 +2,20 @@ using Unity.VisualScripting;
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+
 public class IngameSceneManager : MonoBehaviour
 {
+    public GameObject levelsPanel;
+
+    private void Awake()
+    {
+        if (levelsPanel != null)
+        {
+            levelsPanel.SetActive(false);
+        }
+    }
+
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -14,6 +26,18 @@ public class IngameSceneManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    public void OpenLevelMenu()
+    {
+        levelsPanel.SetActive(true);
+        
+    }
+    
+    public void CloseLevelMenu()
+    {
+        levelsPanel.SetActive(false);
+    }
+    
+    
     public void QuitGame()
     {
         Application.Quit();

@@ -90,12 +90,12 @@ public class BuildManager : MonoBehaviour
 
         if (IsOverModifierBuilding(mouseWorldPos))
         {
-            Debug.Log("Cannot build on modifier buildings!");
+            Debug.Log("cant build on modifier buildings");
             return;
         }
         if (!buildableTilemap.HasTile(cellPos))
         {
-            Debug.Log("Cannot build here: not on buildable terrain.");
+            Debug.Log("cant build here, not on buildable terrain");
             return;
         }
 
@@ -147,7 +147,7 @@ public class BuildManager : MonoBehaviour
     }
     private bool IsOverModifierBuilding(Vector3 position)
     {
-        // Проверяем пересечение со слоем модификаторов
+        
         Collider2D modifier = Physics2D.OverlapCircle(position, 0.3f, modifierBuildingLayer);
         return modifier != null;
     }

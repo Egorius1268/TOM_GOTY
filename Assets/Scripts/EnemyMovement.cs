@@ -26,14 +26,14 @@ public class EnemyMovement : MonoBehaviour
     private int pathIndex = 0;
     
     public EnemyData enemyData;
-    //private bool isUpdatingWaypoint = false;
+    
 
     private void Start()
     {
         
         gameManager = FindObjectOfType<GameManager>();
         if (gameManager == null) 
-            Debug.LogError("No GameManager in scene!");
+            Debug.LogError("No game manager in scene");
         
         if (enemyData != null)
         {
@@ -47,7 +47,7 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
-            Debug.LogError("LevelManager or path not found");
+            Debug.LogError("level manager or path not found");
         }
         originalMoveSpeed = moveSpeed;
     }
@@ -139,7 +139,6 @@ public class EnemyMovement : MonoBehaviour
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
-        
             
             if (elapsed >= nextDamageTime)
             {
@@ -156,6 +155,7 @@ public class EnemyMovement : MonoBehaviour
             sr.color = new Color(1f, alpha * 0.3f, alpha * 0.3f, 1f);
             
             yield return null;
+            
         }
         
         sr.color = originalColor;
@@ -215,12 +215,10 @@ public class EnemyMovement : MonoBehaviour
                 health.TakeDamage((int)damagePerTick);
             }
             
-            
             sr.color = i % 2 == 0 ? Color.green : new Color(0, 0.7f, 0, 1);
             
             yield return new WaitForSeconds(0.5f);
         }
-        
         sr.color = originalColor;
         isPoisoned = false;
         poisonCoroutine = null;

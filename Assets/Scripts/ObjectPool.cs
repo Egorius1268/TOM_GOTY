@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 public class ObjectPool : MonoBehaviour
 {
+    ///public static ObjectPool Instance;
+    
     public GameObject prefab;
     [SerializeField] private Queue<GameObject> pool = new Queue<GameObject>();
     [SerializeField] private int initialPoolSize = 10;

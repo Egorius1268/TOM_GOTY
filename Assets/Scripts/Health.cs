@@ -30,7 +30,6 @@ public class Health : MonoBehaviour
     
     public void TakeDamage (int dmg)
     {
-        
         currentHealth -= dmg;
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
         if(currentHealth <= 0 && !isDestroyed) {

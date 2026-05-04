@@ -10,8 +10,8 @@ public class Bullet5 : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private TrailRenderer trailRenderer;
     Coroutine lifeCoroutine;
-    [Header("Attributes")] [SerializeField]
-    private float bulletSpeed = 5f;
+    [Header("Attributes")] 
+    [SerializeField] private float bulletSpeed = 5f;
     private ParticleSystem particleEffect;
     private GameObject activeTrail;
     private float baseDamage;
@@ -57,7 +57,7 @@ public class Bullet5 : MonoBehaviour
     {
         initialDirection = direction;
         
-        // Запускаем движение немедленно
+        
         rb.linearVelocity = initialDirection * bulletSpeed;
     }
 
@@ -294,7 +294,6 @@ public class Bullet5 : MonoBehaviour
         }
         else
         {
-           
             gameObject.SetActive(false);
         }
     }

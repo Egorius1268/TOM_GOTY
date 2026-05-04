@@ -13,7 +13,6 @@ public class Zoom : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
         if (Input.GetMouseButtonDown(1))
         {
             touchStart = GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
@@ -39,7 +38,8 @@ public class Zoom : MonoBehaviour
 
     void ZoomCamera(float increment)
     {
-        GetComponent<Camera>().orthographicSize = Mathf.Clamp(GetComponent<Camera>().orthographicSize - increment * sensivity, minZoom, maxZoom);
+        GetComponent<Camera>().orthographicSize = Mathf.Clamp(GetComponent<Camera>().orthographicSize - 
+                                                              increment * sensivity, minZoom, maxZoom);
     }
 
     /*private bool IsPointerOverUIElement()

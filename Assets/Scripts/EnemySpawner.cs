@@ -107,7 +107,7 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Enemy prefab doesn't have EnemyMovement component!");
+            Debug.LogWarning("enemy doesnt have enemy movement component");
         }
         
         Health health = enemy.GetComponent<Health>();
@@ -117,11 +117,11 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Enemy prefab doesn't have Health component!");
+            Debug.LogWarning("enemy doesnt have health movement component");
         }
     }
     
-    private EnemyData GetEnemyDataForWave()
+    /*private EnemyData GetEnemyDataForWave()
     {
        
         if (currentWave <= 3 && enemyDatas.Length > 0)
@@ -136,7 +136,7 @@ public class EnemySpawner : MonoBehaviour
         
         int randomIndex = Random.Range(0, enemyDatas.Length);
         return enemyDatas[randomIndex];
-    }
+    }*/
     
     private void UpdateWaveDisplay()
     {

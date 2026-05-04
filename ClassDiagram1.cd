@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Bullet5">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAABCADACAQCBUIAQAIAAkQgAAAAAIAAjgQAgACFA=</HashCode>
+      <FileName>Assets\Scripts\SHIIIII\Bullet5.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Turret1">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AYQGAgAAACAABQAAoAAAEAAAAAAAAAAAAAARiAAAAGA=</HashCode>
+      <FileName>Assets\Scripts\SHIIIII\Turret1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildManager" Collapsed="true">
+    <Position X="13.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQEAgAIACAAAAAAAAgSAAAAgAAQAAAAREEAAAAAOEA=</HashCode>
+      <FileName>Assets\Scripts\BuildManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BulletModifier" Collapsed="true">
+    <Position X="14.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAAAAMAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\BulletModifier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BulletType" Collapsed="true">
+    <Position X="14" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAJACAAgAAEAAAAACAAAAAAAAAAgAEAAEABABEIAA=</HashCode>
+      <FileName>Assets\Scripts\BulletState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Enemy" Collapsed="true">
+    <Position X="7.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Enemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyData" Collapsed="true">
+    <Position X="14.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIEAIAAAABQAAAAAIAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\EnemyData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyMovement" Collapsed="true">
+    <Position X="13.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AERAAAwAEiBAACAFIAAAAAAIQAgBAAAAAiAAQCEAABg=</HashCode>
+      <FileName>Assets\Scripts\EnemyMovement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemySpawner" Collapsed="true">
+    <Position X="7.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQQBYEAACAAhAAACAgAIAAEBAAAwAAAAAAAEBEQAEA=</HashCode>
+      <FileName>Assets\Scripts\EnemySpawner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FloatingHealthBar" Collapsed="true">
+    <Position X="4.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAEAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\FloatingHealthBar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameManager" Collapsed="true">
+    <Position X="8.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAgAIAACAQBIAABAEAACCIAQIQMIEAQABAAAAAAEE=</HashCode>
+      <FileName>Assets\Scripts\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Health" Collapsed="true">
+    <Position X="4.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEBAAAAIADAAAAAAAAAAAAAAAAAEAAAAAAAAgAAQAEA=</HashCode>
+      <FileName>Assets\Scripts\Health.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IngameSceneManager" Collapsed="true">
+    <Position X="6" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAACAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\IngameSceneManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LevelManager" Collapsed="true">
+    <Position X="6" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAEQ=</HashCode>
+      <FileName>Assets\Scripts\LevelManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModifierTowerData" Collapsed="true">
+    <Position X="7.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAEAAQAABAAAAwAAAIgAAAUAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ModifierTowerData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObjectPool" Collapsed="true">
+    <Position X="8.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACBAIAAAAAAAAAIAAAAAAAAAAAgAAAAAAAI=</HashCode>
+      <FileName>Assets\Scripts\ObjectPool.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Turret" Collapsed="true">
+    <Position X="15.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IYQCAAAAAAIABQAAIAAAEAAAAAAAAAAAAAABgAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Turret.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TurretButton" Collapsed="true">
+    <Position X="15.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAJAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\TurretButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TurretData" Collapsed="true">
+    <Position X="11.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAIAAIAgAAAAAQAAAIAAAAUAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\TurretData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="BulletState" Collapsed="true">
+    <Position X="14" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAQAAAAAACAAMAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Assets\Scripts\BulletState.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

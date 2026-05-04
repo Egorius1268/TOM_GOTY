@@ -52,7 +52,8 @@ public class Turret1 : MonoBehaviour
     private void FindOrCreateBulletPool()
     {
         // посик пула для пуль
-        bulletPool = GetComponentInChildren<ObjectPool>();
+        bulletPool = FindObjectOfType<ObjectPool>();
+       // bulletPool = GetComponentInChildren<ObjectPool>();
         
         if (bulletPool == null)
         {
