@@ -11,6 +11,7 @@ public class BuildManager : MonoBehaviour
     public Tilemap buildableTilemap; 
     public LayerMask buildableLayer; 
     public LayerMask modifierBuildingLayer; 
+    public LayerMask trapBuildingLayer;
     private GameManager gameManager;
 
     [Header("Turrets")]
@@ -19,6 +20,7 @@ public class BuildManager : MonoBehaviour
     private Camera mainCam;
     private TurretData selectedTurret;
     private bool isInputBlocked = false;
+    public bool isTrap;
 
     private void Awake()
     {
@@ -88,6 +90,19 @@ public class BuildManager : MonoBehaviour
         
         Vector3Int cellPos = buildableTilemap.WorldToCell(mouseWorldPos);
 
+        if (selectedTurret.isTrap)
+        {
+            Collider2D road = Physics2D.OverlapPoint(mouseWorldPos, trapBuildingLayer);
+            if (road == null)
+            {
+                Debug.Log("поптыка стройки ловушки вне дороги");
+                return;
+            }
+            
+            
+            
+        }
+
         if (IsOverModifierBuilding(mouseWorldPos))
         {
             Debug.Log("cant build on modifier buildings");
@@ -134,7 +149,7 @@ public class BuildManager : MonoBehaviour
             Debug.Log($"Not enough money! Need {selectedTurret.cost}");
             return;
         }
-        gameManager.DeductMoney(selectedTurret.cost); // вычет деняк
+        //gameManager.DeductMoney(selectedTurret.cost); // вычет деняк
     }
     private bool CanAffordTurret()
     {
@@ -150,6 +165,13 @@ public class BuildManager : MonoBehaviour
         
         Collider2D modifier = Physics2D.OverlapCircle(position, 0.3f, modifierBuildingLayer);
         return modifier != null;
+    }
+    
+    private bool IsOverTrap(Vector3 position)
+    {
+        
+        Collider2D trap = Physics2D.OverlapCircle(position, 0.3f, trapBuildingLayer);
+        return trap != null;
     }
     
     private void OnDrawGizmos()

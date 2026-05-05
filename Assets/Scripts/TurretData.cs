@@ -7,6 +7,7 @@ public class TurretData : ScriptableObject
     public new string name;
     public Sprite icon;
     public int cost;
+    public bool isTrap;
 
     [Header("Combat")]
     public float damage;
@@ -19,5 +20,7 @@ public class TurretData : ScriptableObject
     
     [Header("Visual")]
     public GameObject prefab; 
+    
+    
      
 }
