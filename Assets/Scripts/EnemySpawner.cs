@@ -71,7 +71,7 @@ public class EnemySpawner : MonoBehaviour
     private void EndWave() {
         isSpawning = false;
         timeSinceLastSpawn = 0f;
-        if (currentWave >= maxWaves && !levelCompleted)
+        if (maxWaves > 0 && currentWave >= maxWaves && !levelCompleted)
         {
             levelCompleted = true;
             GameManager gameManager = FindObjectOfType<GameManager>();

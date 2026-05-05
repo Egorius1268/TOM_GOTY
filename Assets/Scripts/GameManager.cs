@@ -91,14 +91,15 @@ public class GameManager : MonoBehaviour
 
     public void CompleteLevel()
     {
+        Debug.Log("CompleteLevel вызван объектом: " + gameObject.name, this); 
         if (isGameOver) return;
         int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
         int currentIndex = SceneManager.GetActiveScene().buildIndex;
         isLevelComplete = true;
         Time.timeScale = 0f;
-        if (currentIndex > unlockedLevel)
+        if (currentIndex >= unlockedLevel)
         {
-            PlayerPrefs.SetInt("UnlockedLevel", currentIndex);
+            PlayerPrefs.SetInt("UnlockedLevel", currentIndex + 1);
             PlayerPrefs.Save();
         }
         if (buildPanel != null) buildPanel.SetActive(false);
