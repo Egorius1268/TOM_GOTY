@@ -209,19 +209,19 @@ public class Bullet5 : MonoBehaviour
     
     private void ApplyBurnEffect(GameObject target)
     {
-        EnemyMovement enemyMovement = target.GetComponent<EnemyMovement>();
-        if (enemyMovement != null)
+        EnemyEffects enemyEffects = target.GetComponent<EnemyEffects>();
+        if (enemyEffects != null)
         {
-            enemyMovement.ApplyBurnEffect(bulletType.burnDamagePerSecond, bulletType.burnDuration);
+            enemyEffects.ApplyBurnEffect(bulletType.burnDamagePerSecond, bulletType.burnDuration);
         }
     }
     
     private void ApplySlowEffect(GameObject target)
     {
-        EnemyMovement enemyMovement = target.GetComponent<EnemyMovement>();
-        if (enemyMovement != null)
+        EnemyEffects enemyEffects = target.GetComponent<EnemyEffects>();
+        if (enemyEffects != null)
         {
-            enemyMovement.ApplySlowEffect(bulletType.slowPercentage, bulletType.slowDuration);
+            enemyEffects.ApplySlowEffect(bulletType.slowPercentage, bulletType.slowDuration);
         }
     }
     
@@ -256,11 +256,11 @@ public class Bullet5 : MonoBehaviour
     
     private void ApplyPoisonEffect(GameObject target)
     {
-        EnemyMovement enemyMovement = target.GetComponent<EnemyMovement>();
-        if (enemyMovement != null)
+        EnemyEffects enemyEffects = target.GetComponent<EnemyEffects>();
+        if (enemyEffects != null)
         {
             
-            enemyMovement.ApplyPoisonEffect(baseDamage * 0.3f, 5f); // 30% урона ядом в течение 5 секунд
+            enemyEffects.ApplyPoisonEffect(baseDamage * 0.3f, 5f); // 30% урона ядом в течение 5 секунд
         }
     }
     

@@ -14,7 +14,8 @@ public class GameManager : MonoBehaviour
     public GameObject buildPanel;
     public GameObject hpAndCurrencyPanel;
     public GameObject levelCompletePanel;
-    public static BuildManager Instance;
+    //public static BuildManager Instance;
+    public static GameManager Instance; 
     public int startingPlayerHP = 100;
     public int PlayerHP;
     public int startMoney;
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Time.timeScale = 1f;
+        Instance = this;
     }
 
     private void Start()

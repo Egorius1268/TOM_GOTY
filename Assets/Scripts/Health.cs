@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    private GameManager gameManager;
     [Header("Attributes")]
     [SerializeField] private int maxHealth = 8;
     [SerializeField] private int currentHealth;
@@ -19,7 +18,7 @@ public class Health : MonoBehaviour
         healthBar = GetComponentInChildren<FloatingHealthBar>();
     }
     void Start(){
-        gameManager = FindObjectOfType<GameManager>();
+        
         if (enemyData != null)
         {
             currentHealth = enemyData.maxHealth;
@@ -34,7 +33,10 @@ public class Health : MonoBehaviour
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
         if(currentHealth <= 0 && !isDestroyed) {
             isDestroyed = true;
-            gameManager.AddMoney(enemyData.moneyReward);
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.AddMoney(enemyData.moneyReward);
+            }
             Destroy(gameObject);
             EnemySpawner.onEnemyDestroy.Invoke();
         }

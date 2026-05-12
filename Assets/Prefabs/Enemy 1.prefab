@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8411527617519213267}
   - component: {fileID: 7929689496981174191}
+  - component: {fileID: 5304045316828939030}
+  - component: {fileID: 2352702315442653795}
   - component: {fileID: 2871594943953758729}
   - component: {fileID: 3190224720337892947}
   - component: {fileID: 7024034257144362101}
-  - component: {fileID: 2352702315442653795}
   - component: {fileID: 6698360891884944458}
   m_Layer: 8
   m_Name: Enemy 1
@@ -93,6 +94,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5304045316828939030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577963078636758581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017b91e4a05a0aa4b8bdb4d7a306c48a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sr: {fileID: 7929689496981174191}
+--- !u!114 &2352702315442653795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577963078636758581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75ccc9e3637d8df4e9b75adf786c786e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 6698360891884944458}
+  spriteRenderer: {fileID: 7929689496981174191}
+  moveSpeed: 0
+  waypointThreshold: 0.1
+  enemyData: {fileID: 0}
 --- !u!114 &2871594943953758729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,22 +197,6 @@ MonoBehaviour:
   maxHealth: 8
   currentHealth: 8
   healthBar: {fileID: 0}
-  enemyData: {fileID: 0}
---- !u!114 &2352702315442653795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 577963078636758581}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75ccc9e3637d8df4e9b75adf786c786e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 6698360891884944458}
-  spriteRenderer: {fileID: 7929689496981174191}
-  waypointThreshold: 0.1
   enemyData: {fileID: 0}
 --- !u!50 &6698360891884944458
 Rigidbody2D:
