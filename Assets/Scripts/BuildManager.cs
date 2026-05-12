@@ -46,6 +46,7 @@ public class BuildManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            if (InGamePauseManager.IsGamePaused) return;
             TryBuildTurret();
         }
         else if (Input.GetMouseButtonDown(1)) // пкм отмена, потом мб на юи кнопку переташить
