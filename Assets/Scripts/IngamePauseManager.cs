@@ -6,11 +6,12 @@ public class InGamePauseManager : MonoBehaviour
     public GameObject pausePanel;
     private bool isPaused = false;
     public static bool IsGamePaused;
+    
 
     // Update is called once per frame
     public void Update()
     {
-        IsGamePaused = isPaused;
+        //IsGamePaused = isPaused;
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
@@ -30,6 +31,7 @@ public class InGamePauseManager : MonoBehaviour
         pausePanel.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
+        IsGamePaused = false;
     }
 
     public void Pause()
@@ -37,6 +39,7 @@ public class InGamePauseManager : MonoBehaviour
         pausePanel.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
+        IsGamePaused = true;
     }
 
     public void Restart()
