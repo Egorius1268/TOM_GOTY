@@ -145,11 +145,7 @@ public class BuildManager : MonoBehaviour
         {
             Debug.Log($"Built non-turret object: {selectedTurret.name}");
         }
-        if (!gameManager.CanAfford(selectedTurret.cost))
-        {
-            Debug.Log($"Not enough money! Need {selectedTurret.cost}");
-            return;
-        }
+        
         //gameManager.DeductMoney(selectedTurret.cost); // вычет деняк
     }
     private bool CanAffordTurret()
@@ -163,14 +159,12 @@ public class BuildManager : MonoBehaviour
     }
     private bool IsOverModifierBuilding(Vector3 position)
     {
-        
         Collider2D modifier = Physics2D.OverlapCircle(position, 0.3f, modifierBuildingLayer);
         return modifier != null;
     }
     
     private bool IsOverTrap(Vector3 position)
     {
-        
         Collider2D trap = Physics2D.OverlapCircle(position, 0.3f, trapBuildingLayer);
         return trap != null;
     }

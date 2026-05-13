@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -23,6 +22,9 @@ public class Turret1 : MonoBehaviour
     private float turretDamage;
     private Transform target;
     private float timeUntilFire;
+    private float currentDamage;
+    private float currentRange;
+    private float currentFireRate;
     
 
     private void Awake()
@@ -47,7 +49,10 @@ public class Turret1 : MonoBehaviour
     
     void Start()
     {
+        
         Debug.Log($"Built {data.name}, cost: {data.cost}");
+        ApplyBuffs();
+        
     }
     private void FindOrCreateBulletPool()
     {
@@ -89,7 +94,7 @@ public class Turret1 : MonoBehaviour
         else {
             timeUntilFire += Time.deltaTime;
 
-            if(timeUntilFire >= 1f / bps) {
+            if(timeUntilFire >= 1f / currentFireRate) {      // bps текущий изменен
                 Shoot();
                 timeUntilFire = 0f;
             }
@@ -124,7 +129,7 @@ public class Turret1 : MonoBehaviour
            //bulletScript.SetTarget(target);
            Vector2 shootDirection = (target.position - firingPoint.position).normalized;
            bulletScript.SetDirection(shootDirection);
-           bulletScript.SetDamage(turretDamage); 
+           bulletScript.SetDamage(currentDamage); 
            bulletScript.SetPool(bulletPool); 
            bulletScript.SetBulletType(data.bulletType);
        }
@@ -134,7 +139,7 @@ public class Turret1 : MonoBehaviour
        }
     }
     private void FindTarget() {
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, targetingRange, (Vector2)
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, currentRange, (Vector2)
             transform.position, 0f, enemyMask);
 
         if (hits.Length > 0 ) {
@@ -143,7 +148,7 @@ public class Turret1 : MonoBehaviour
     }
 
     private bool CheckTargetIsInRange() {
-        return Vector2.Distance(target.position, transform.position) <= targetingRange;
+        return Vector2.Distance(target.position, transform.position) <= currentRange;
     }
 
     private void OnDrawGizmos()
@@ -154,6 +159,28 @@ public class Turret1 : MonoBehaviour
             Gizmos.DrawWireSphere(transform.position, data.range);
         }
     }
+
+    private void ApplyBuffs()
+    {
+        currentDamage = turretDamage;
+        currentRange = targetingRange;
+        currentFireRate = bps;
+        
+        Collider2D hit = Physics2D.OverlapPoint(transform.position, LayerMask.GetMask("BuffZone"));
+
+        if (hit != null)
+        {
+            Buff_DebuffZones zone = hit.GetComponent<Buff_DebuffZones>();
+            if (zone != null)
+            {
+                currentDamage *= zone.damageMultiplayer;
+                currentRange *= zone.rangeMultiplayer;
+                currentFireRate *= zone.bpsMultiplayer;
+                
+            }
+        }
+    }
+    
     
    /* private void RotateTowardsTarget() { 
         float angle = Mathf.Atan2(target.position.y - transform.position.y, target.position.x - 
