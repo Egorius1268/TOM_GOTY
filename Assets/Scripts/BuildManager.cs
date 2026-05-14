@@ -69,12 +69,14 @@ public class BuildManager : MonoBehaviour
     {
         selectedTurret = turret;
       //  Debug.Log($"Selected: {turret.name}");
+      SetZonesVision(true); 
     }
 
     public void DeselectTurret()
     {
         selectedTurret = null; 
         //Debug.Log("Deselected turret");
+        SetZonesVision(false);
     }
 
     private void TryBuildTurret()
@@ -168,6 +170,22 @@ public class BuildManager : MonoBehaviour
         Collider2D trap = Physics2D.OverlapCircle(position, 0.3f, trapBuildingLayer);
         return trap != null;
     }
+    
+    
+    private void SetZonesVision(bool visible)
+    {
+        Buff_DebuffZones[] zones = Object.FindObjectsByType<Buff_DebuffZones>(FindObjectsSortMode.None);
+    
+        foreach (var zone in zones)
+        {
+            SpriteRenderer sr = zone.GetComponent<SpriteRenderer>();
+            if (sr != null) 
+            {
+                sr.enabled = visible;
+            }
+        }
+    }
+    
     
     private void OnDrawGizmos()
     {

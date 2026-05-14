@@ -28,8 +28,12 @@ public class Buff_DebuffZones : MonoBehaviour
         
         CorrectSpriteSize();
     }
-    
-    
+
+    private void Start()
+    {
+        GetComponent<SpriteRenderer>().enabled = false;
+    }
+
     private void OnValidate()
     {
         CorrectSpriteSize();
@@ -52,10 +56,5 @@ public class Buff_DebuffZones : MonoBehaviour
         }
         transform.localScale = Vector3.one; 
     }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = zoneColor;
-        Gizmos.DrawSphere(transform.position, zoneRadius);
-    }
+    
 }
