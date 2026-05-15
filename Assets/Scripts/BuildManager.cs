@@ -185,6 +185,11 @@ public class BuildManager : MonoBehaviour
             }
         }
     }
+
+    public TurretData GetSelectedBuilding()
+    {
+        return selectedTurret;
+    }
     
     
     private void OnDrawGizmos()
