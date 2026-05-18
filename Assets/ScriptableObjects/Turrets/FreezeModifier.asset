@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fd1c042532057c4fb74e7dec40caf68, type: 3}
+  m_Name: FreezeModifier
+  m_EditorClassIdentifier: 
+  name: Frost Gate
+  icon: {fileID: -5954229690154693420, guid: 8f85afb22b50c144c8a61f6704476753, type: 3}
+  worldSprite: {fileID: 7482667652216324306, guid: a96582d8cd147094ca4d4680ffaeda07, type: 3}
+  cost: 42
+  modifierState: 2
+  bulletType: {fileID: 11400000, guid: 34110c14567b05d448ae7f3112504cae, type: 2}
+  prefab: {fileID: 6413496514119043402, guid: c07058e0c9f70944aa544679e2595418, type: 3}
+  towerColor: {r: 0.29521534, g: 0.44277802, b: 0.5773585, a: 1}
+  triggerRadius: 1.5
+  hasPermanentEffect: 0
+  effectDuration: 5
+  maxModificationsPerSecond: 10

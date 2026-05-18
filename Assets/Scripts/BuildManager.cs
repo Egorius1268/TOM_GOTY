@@ -19,6 +19,10 @@ public class BuildManager : MonoBehaviour
 
     private Camera mainCam;
     private TurretData selectedTurret;
+    private ModifierTowerData selectedModifier; 
+    private bool isBuildingModifier = false; 
+    private GameObject ghostSpriteObject; 
+    private SpriteRenderer ghostSpriteRenderer;
     private bool isInputBlocked = false;
     public bool isTrap;
 
@@ -34,6 +38,16 @@ public class BuildManager : MonoBehaviour
     {
         gameManager = FindObjectOfType<GameManager>();
         mainCam = Camera.main;
+        
+        
+        ghostSpriteObject = new GameObject("ghostSprite");
+        ghostSpriteRenderer =  ghostSpriteObject.AddComponent<SpriteRenderer>();
+        
+        ghostSpriteRenderer.color = new Color(1f, 1f, 1f, 0.3f);
+        ghostSpriteRenderer.sortingOrder = 50;
+        
+        ghostSpriteObject.SetActive(false);
+        
         DeselectTurret(); // начало без выбора
     }
 
@@ -42,17 +56,27 @@ public class BuildManager : MonoBehaviour
     private void Update()
     {
         if (isInputBlocked) return;
-        if (selectedTurret == null) return;
-
+        if (Input.GetMouseButtonDown(1)) 
+        {
+            DeselectTurret();
+            return;
+        }
+        if (selectedTurret == null && selectedModifier == null) return;
+        if (ghostSpriteObject.activeSelf)
+        {
+            Vector3 mainCamPos = mainCam.ScreenToWorldPoint(Input.mousePosition);
+            mainCamPos.z = 0;
+            ghostSpriteObject.transform.position = mainCamPos;
+        }
         if (Input.GetMouseButtonDown(0))
         {
             if (InGamePauseManager.IsGamePaused) return;
             TryBuildTurret();
         }
-        else if (Input.GetMouseButtonDown(1)) // пкм отмена, потом мб на юи кнопку переташить
-        {
-            DeselectTurret();
-        }
+        // else if (Input.GetMouseButtonDown(1)) // пкм отмена, потом мб на юи кнопку переташить
+        // {
+        //     DeselectTurret();
+        // }
     }
     
     public void BlockInput(bool block)
@@ -67,21 +91,65 @@ public class BuildManager : MonoBehaviour
     }
     public void SelectTurret(TurretData turret)
     {
+        DeselectTurret();
         selectedTurret = turret;
-      //  Debug.Log($"Selected: {turret.name}");
-      SetZonesVision(true); 
+
+        if (ghostSpriteRenderer != null && selectedTurret != null)
+        {
+            ghostSpriteRenderer.sprite = selectedTurret.worldSprite;
+            Color ghostColor = selectedTurret.towerColor;
+            ghostColor.a = 0.3f;
+            ghostSpriteRenderer.color = ghostColor; 
+            
+            ghostSpriteObject.SetActive(true);
+        }
+        
+         //  Debug.Log($"Selected: {turret.name}");
+        SetZonesVision(true); 
+    }
+    
+    public void SelectModifier(ModifierTowerData modifier)
+    {
+        DeselectTurret();
+
+        selectedModifier = modifier;
+        isBuildingModifier = true;
+
+        if (ghostSpriteRenderer != null && selectedModifier != null)
+        {
+            Color ghostColor = selectedModifier.towerColor;
+            ghostColor.a = 0.3f; 
+            ghostSpriteRenderer.sprite = selectedModifier.worldSprite; 
+            ghostSpriteRenderer.color = selectedModifier.towerColor; 
+            
+            ghostSpriteObject.SetActive(true);
+        }
+        
+        SetZonesVision(true);
     }
 
     public void DeselectTurret()
     {
         selectedTurret = null; 
+        selectedModifier = null;
+        isBuildingModifier = false;
+        if (ghostSpriteRenderer != null)
+        {
+            ghostSpriteRenderer.sprite = null;
+            ghostSpriteRenderer.color = new Color(1f, 1f, 1f, 0.3f); 
+        }
+        
+        if (ghostSpriteObject != null) ghostSpriteObject.SetActive(false);   
+        
         //Debug.Log("Deselected turret");
         SetZonesVision(false);
     }
 
     private void TryBuildTurret()
     {
-        if (!CanAffordTurret()) // проверка  на доступность покупки
+        int currentCost = isBuildingModifier ? selectedModifier.cost : selectedTurret.cost;
+        GameObject prefabToSpawn = isBuildingModifier ? selectedModifier.prefab : selectedTurret.prefab;
+        if (!gameManager.CanAfford(currentCost)) // проверка  на доступность покупки
         {
             return;
         }
@@ -93,7 +161,7 @@ public class BuildManager : MonoBehaviour
         
         Vector3Int cellPos = buildableTilemap.WorldToCell(mouseWorldPos);
 
-        if (selectedTurret.isTrap)
+        if (selectedTurret != null && selectedTurret.isTrap && !isBuildingModifier)
         {
             Collider2D road = Physics2D.OverlapPoint(mouseWorldPos, trapBuildingLayer);
             if (road == null)
@@ -101,9 +169,6 @@ public class BuildManager : MonoBehaviour
                 Debug.Log("поптыка стройки ловушки вне дороги");
                 return;
             }
-            
-            
-            
         }
 
         if (IsOverModifierBuilding(mouseWorldPos))
@@ -122,7 +187,7 @@ public class BuildManager : MonoBehaviour
             return;
         }
         
-
+        
         // проверка пересечения с уже построенным
         Collider2D occupied = Physics2D.OverlapCircle(mouseWorldPos, 0.4f, buildableLayer);
         if (occupied != null)
@@ -130,24 +195,38 @@ public class BuildManager : MonoBehaviour
             Debug.Log("Too close to another building!");
             return;
         }
-        gameManager.DeductMoney(selectedTurret.cost);
+        gameManager.DeductMoney(currentCost);
         
         // строительство
-        GameObject newObject = Instantiate(selectedTurret.prefab, mouseWorldPos, Quaternion.identity);
+        GameObject newObject = Instantiate(prefabToSpawn, mouseWorldPos, Quaternion.identity);
         
-        Turret1 turretScript = newObject.GetComponent<Turret1>();
-        
-        if (turretScript != null)
+        if (isBuildingModifier)
         {
-            turretScript.data = selectedTurret; // передаем данные с СО
-            turretScript.InitializeFromData(); 
-            Debug.Log($"Built turret: {selectedTurret.name}");
+            BulletModifier modifierScript = newObject.GetComponent<BulletModifier>();
+            if (modifierScript != null)
+            {
+                modifierScript.data = selectedModifier;
+                modifierScript.InitializeFromData();
+                Debug.Log($"Built modifier: {selectedModifier.name}");
+            }
         }
         else
         {
-            Debug.Log($"Built non-turret object: {selectedTurret.name}");
+            Turret1 turretScript = newObject.GetComponent<Turret1>();
+        
+            if (turretScript != null)
+            {
+                turretScript.data = selectedTurret; // передаем данные с СО
+                turretScript.InitializeFromData(); 
+                Debug.Log($"Built turret: {selectedTurret.name}");
+            }
         }
         
+        
+        if (!gameManager.CanAfford(currentCost))
+        {
+            DeselectTurret();
+        }
         //gameManager.DeductMoney(selectedTurret.cost); // вычет деняк
     }
     private bool CanAffordTurret()
@@ -191,6 +270,10 @@ public class BuildManager : MonoBehaviour
         return selectedTurret;
     }
     
+    public ModifierTowerData GetSelectedModifier()
+    {
+        return selectedModifier;
+    }
     
     private void OnDrawGizmos()
     {

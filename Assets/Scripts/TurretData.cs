@@ -6,8 +6,11 @@ public class TurretData : ScriptableObject
 {
     public new string name;
     public Sprite icon;
+    public Sprite worldSprite;
+    public Color towerColor = Color.white; 
     public int cost;
     public bool isTrap;
+    
 
     [Header("Combat")]
     public float damage;

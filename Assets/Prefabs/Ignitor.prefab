@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 6413496514119043402}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.556, y: 0.48, z: 0}
-  m_LocalScale: {x: 0.52640283, y: 0.8104672, z: 1}
+  m_LocalPosition: {x: 1, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -102,8 +102,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be707ab3489042f448c1b49b1fe07f2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newBulletType: {fileID: 11400000, guid: 399ebe1f3485abe4f880a28d2b0481a8, type: 2}
-  overrideType: 1
+  data: {fileID: 0}
+  newBulletType: {fileID: 0}
+  overrideType: 0
   bulletLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -161,7 +162,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6413496514119043402}
-  m_BodyType: 1
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

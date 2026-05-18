@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Damger
   m_EditorClassIdentifier: 
   name: Damager
-  icon: {fileID: 0}
+  icon: {fileID: 11048562347424618, guid: ac2152b85d14f7d4cb863842642db48d, type: 3}
+  worldSprite: {fileID: 7482667652216324306, guid: dcd954dc690c0244ca2ea658fd15328e, type: 3}
   cost: 200
+  isTrap: 0
   damage: 60
   range: 7.56
   fireRate: 0.4

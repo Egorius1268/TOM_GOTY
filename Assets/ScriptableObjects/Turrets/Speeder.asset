@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Speeder
   m_EditorClassIdentifier: 
   name: 
-  icon: {fileID: 0}
+  icon: {fileID: -7998752234084621699, guid: 5ecb3fd80e0b593429e07f0ff06323c2, type: 3}
+  worldSprite: {fileID: 7482667652216324306, guid: dcd954dc690c0244ca2ea658fd15328e, type: 3}
   cost: 50
+  isTrap: 0
   damage: 1
   range: 3.67
   fireRate: 4

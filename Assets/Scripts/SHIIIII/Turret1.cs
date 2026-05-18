@@ -12,6 +12,7 @@ public class Turret1 : MonoBehaviour
    //[SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firingPoint;
     [SerializeField] private ObjectPool bulletPool;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     [Header("Attribute")] 
     //[SerializeField] private float targetingRange = 5f;
@@ -29,6 +30,7 @@ public class Turret1 : MonoBehaviour
 
     private void Awake()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         if (data != null)
         {
             InitializeFromData();
@@ -36,7 +38,7 @@ public class Turret1 : MonoBehaviour
     }
     public void InitializeFromData()
     {
-        
+        spriteRenderer.sprite = data.worldSprite;
         targetingRange = data.range;
         bps = data.fireRate;
         gameObject.name = data.name + " (Turret)";

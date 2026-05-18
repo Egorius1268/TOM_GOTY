@@ -8,6 +8,7 @@ public class EnemySpawner : MonoBehaviour
 {
     [Header("Refereneces")]
     [SerializeField] private EnemyData[] enemyDatas;
+    [SerializeField] private LevelWavesData levelData; 
     
 
     [Header("Attributes")]
@@ -37,114 +38,109 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(StartWave());
+        StartCoroutine(StartWaveCoroutine(levelData.timeBeforeFirstWave));
     }
-
-    private void Update()
-    {
-        if (!isSpawning || levelCompleted) return;
-        timeSinceLastSpawn += Time.deltaTime;
-
-        if (timeSinceLastSpawn >= (1f / enemiesPerSecond) && enemiesLeftToSpawn > 0) {
-            SpawnEnemy();
-            enemiesLeftToSpawn--;
-            enemiesAlive++;
-            timeSinceLastSpawn = 0f;
-        }
-
-        if (enemiesAlive == 0 && enemiesLeftToSpawn == 0) {
-            EndWave();
-        }
-    }
+    
 
     private void EnemyDestroyed() {
         enemiesAlive--;
-    }
-
-    private IEnumerator StartWave()
-    {
-        yield return new WaitForSeconds(timeBetweenWaves);
-        isSpawning = true;
-        enemiesLeftToSpawn = EnemiesPerWave();
-    }
-
-    private void EndWave() {
-        isSpawning = false;
-        timeSinceLastSpawn = 0f;
-        if (maxWaves > 0 && currentWave >= maxWaves && !levelCompleted)
+        if (!isSpawning && enemiesAlive <= 0)
         {
-            levelCompleted = true;
-            GameManager gameManager = FindObjectOfType<GameManager>();
-            if (gameManager != null)
+            EndWave();
+        }
+    }
+    private void OnDestroy()
+    {
+        onEnemyDestroy.RemoveListener(EnemyDestroyed);
+    }
+    private IEnumerator StartWaveCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        int waveIndex = currentWave - 1;
+        if (waveIndex < levelData.waves.Length)
+        {
+            WaveConfig currentWaveConfig = levelData.waves[waveIndex];
+            StartCoroutine(SpawnWaveGroupsRoutine(currentWaveConfig)); // корутина для групп врагов
+        }
+    }
+
+    private IEnumerator SpawnWaveGroupsRoutine(WaveConfig wave)
+    {
+        isSpawning = true;
+        foreach (EnemyGroup group in wave.enemyGroups)
+        {
+            if (group.enemyType == null || group.enemyType.prefab == null) continue;
+            for (int i = 0; i < group.count; i++)
             {
-                gameManager.CompleteLevel();
+                SpawnEnemy(group.enemyType);
+                enemiesAlive++;
+                yield return new WaitForSeconds(group.spawnInterval);
+            }
+        }
+        isSpawning = false; 
+        if (enemiesAlive <= 0)
+        {
+            EndWave();
+        }
+        
+    }
+
+    private void EndWave()
+    {
+        if (currentWave >= levelData.waves.Length)
+        {
+            if (!levelCompleted)
+            {
+                levelCompleted = true;
+                GameManager gameManager = FindObjectOfType<GameManager>();
+                if (gameManager != null)
+                {
+                    gameManager.CompleteLevel();
+                }
             }
             return;
         }
+
         currentWave++;
         UpdateWaveDisplay();
-        StartCoroutine(StartWave());
+        
+        StartCoroutine(StartWaveCoroutine(levelData.timeBetweenWaves));
     }
     
     
 
-    private void SpawnEnemy()
+    private void SpawnEnemy(EnemyData enemyData)
     {
-        EnemyData enemyData = enemyDatas[0];
         GameObject prefabToSpawn = enemyData.prefab;
         if (prefabToSpawn == null)
         {
-            Debug.LogError($"No prefab assigned in {enemyData.name}!");
             return;
         }
         GameObject enemy = Instantiate(prefabToSpawn, LevelManager.main.startPoint.position, Quaternion.identity);
-        //Instantiate(prefabToSpawn, LevelManager.main.startPoint.position, Quaternion.identity);
-        
         EnemyMovement enemyMovement = enemy.GetComponent<EnemyMovement>();
         if (enemyMovement != null)
         {
             enemyMovement.enemyData = enemyData;
         }
-        else
-        {
-            Debug.LogWarning("enemy doesnt have enemy movement component");
-        }
         
         Health health = enemy.GetComponent<Health>();
-        if (health != null)
+        if (health != null) health.enemyData = enemyData;
+        if (prefabToSpawn == null)
         {
-            health.enemyData = enemyData;
+            Debug.LogError($"No prefab assigned in {enemyData.name}!");
+            return;
         }
-        else
-        {
-            Debug.LogWarning("enemy doesnt have health movement component");
-        }
+        //Instantiate(prefabToSpawn, LevelManager.main.startPoint.position, Quaternion.identity);
+        
+        
     }
     
-    /*private EnemyData GetEnemyDataForWave()
-    {
-       
-        if (currentWave <= 3 && enemyDatas.Length > 0)
-            return enemyDatas[0]; 
-        
-        if (currentWave > 3 && currentWave <= 6 && enemyDatas.Length > 1)
-            return enemyDatas[1]; 
-        
-        if (currentWave > 6 && enemyDatas.Length > 2)
-            return enemyDatas[2]; 
-        
-        
-        int randomIndex = Random.Range(0, enemyDatas.Length);
-        return enemyDatas[randomIndex];
-    }*/
     
     private void UpdateWaveDisplay()
     {
         currentWaveText.text = currentWave.ToString();
     }
 
-    private int EnemiesPerWave() { 
-        return Mathf.RoundToInt(baseEnemies * Mathf.Pow(currentWave, difficultyScalingFactor));
-    }
+    // private void timeSinceLastSpawn(float val) {} 
 
 }
