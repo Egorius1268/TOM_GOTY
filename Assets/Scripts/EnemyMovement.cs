@@ -22,8 +22,8 @@ public class EnemyMovement : MonoBehaviour
         
         if (enemyData != null)
         {
-            if (spriteRenderer != null && enemyData.sprite != null)
-                spriteRenderer.sprite = enemyData.sprite;
+            if (spriteRenderer != null && enemyData.worldSprite != null)
+                spriteRenderer.sprite = enemyData.worldSprite;
             moveSpeed = enemyData.moveSpeed;
         }
         if (LevelManager.main != null && LevelManager.main.path.Length > 0)
@@ -55,6 +55,12 @@ public class EnemyMovement : MonoBehaviour
     private void FixedUpdate()
     {
         if (target == null) return;
+        
+        if (moveSpeed <= 0f)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
         
         Vector2 direction = (target.position - transform.position);
         float distanceToTarget = direction.magnitude;

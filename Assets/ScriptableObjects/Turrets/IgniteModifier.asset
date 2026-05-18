@@ -9,15 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50e578e77b5639c4680387985c5f5027, type: 3}
+  m_Script: {fileID: 11500000, guid: 0fd1c042532057c4fb74e7dec40caf68, type: 3}
   m_Name: IgniteModifier
   m_EditorClassIdentifier: 
-  name: 
-  icon: {fileID: 0}
-  cost: 0
-  damage: 0
-  range: 0
-  fireRate: 0
-  bulletType: {fileID: 0}
-  bulletPrefab: {fileID: 0}
+  name: "\u041E\u0433\u043D\u0435\u043D\u043D\u044B\u0435 \u0432\u0440\u0430\u0442\u0430"
+  icon: {fileID: -3641092798304355568, guid: 8e6dc8d0359944d40ae2afd744cb0d91, type: 3}
+  worldSprite: {fileID: -3641092798304355568, guid: 8e6dc8d0359944d40ae2afd744cb0d91, type: 3}
+  cost: 75
+  modifierState: 1
+  bulletType: {fileID: 11400000, guid: 399ebe1f3485abe4f880a28d2b0481a8, type: 2}
   prefab: {fileID: 6413496514119043402, guid: c07058e0c9f70944aa544679e2595418, type: 3}
+  towerColor: {r: 1, g: 1, b: 1, a: 1}
+  triggerRadius: 1.2
+  hasPermanentEffect: 0
+  effectDuration: 3
+  maxModificationsPerSecond: 10

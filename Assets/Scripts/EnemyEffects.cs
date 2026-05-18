@@ -98,7 +98,10 @@ public class EnemyEffects : MonoBehaviour
         isSlowed = true;
         if (movement == null || movement.enemyData == null) yield break;
         float normalSpeed = movement.enemyData.moveSpeed;
-        movement.moveSpeed = normalSpeed * (1f - slowPercent); 
+        if (movement.moveSpeed > 0f)
+        {
+            movement.moveSpeed = normalSpeed * (1f - slowPercent); 
+        }
         
         
         Color originalColor = sr.color;
@@ -109,7 +112,13 @@ public class EnemyEffects : MonoBehaviour
         if (this != null) 
         {
             if (sr != null) sr.color = defaultColor;
-            if (movement != null) movement.moveSpeed = normalSpeed;
+            if (movement != null)
+            {
+                if (movement.moveSpeed > 0f)
+                {
+                    movement.moveSpeed = normalSpeed;
+                }
+            }
         }
         
         isSlowed = false;

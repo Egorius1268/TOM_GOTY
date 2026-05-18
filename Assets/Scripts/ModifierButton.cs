@@ -8,6 +8,7 @@ public class ModifierButton : MonoBehaviour
     [SerializeField] private Image iconImage;
     [SerializeField] private TextMeshProUGUI priceText;
     [SerializeField] private GameObject selectionIndicator;
+    [SerializeField] private TextMeshProUGUI nameText;
     private int price;
     private Button button;
 
@@ -28,6 +29,11 @@ public class ModifierButton : MonoBehaviour
         {
             price = modifierData.cost;
             priceText.text = price.ToString();
+            
+            if (nameText != null)
+            {
+                nameText.text = modifierData.name;
+            }
         }
     }
 

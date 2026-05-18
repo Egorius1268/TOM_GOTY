@@ -12,14 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50e578e77b5639c4680387985c5f5027, type: 3}
   m_Name: Speeder
   m_EditorClassIdentifier: 
-  name: 
+  name: "\u041C\u043E\u0440\u043E\u0437\u043D\u0430\u044F \u0441\u043A\u043E\u0440\u043E\u0441\u0442\u043D\u0430\u044F"
   icon: {fileID: -7998752234084621699, guid: 5ecb3fd80e0b593429e07f0ff06323c2, type: 3}
   worldSprite: {fileID: 7482667652216324306, guid: dcd954dc690c0244ca2ea658fd15328e, type: 3}
+  rangeCircleSprite: {fileID: 3358418296961141179, guid: f55b5f3d9454f33409f19ff06bdc96ce, type: 3}
+  towerColor: {r: 1, g: 1, b: 1, a: 1}
   cost: 50
   isTrap: 0
-  damage: 1
+  buildingType: 0
+  damage: 3
   range: 3.67
   fireRate: 4
   bulletType: {fileID: 11400000, guid: 34110c14567b05d448ae7f3112504cae, type: 2}
   bulletPrefab: {fileID: 5764272997128909184, guid: 2e607f266c98d034ca09ef33a6ff5fd4, type: 3}
+  trapEffectState: 0
+  effectDuration: 3
   prefab: {fileID: 8075602802070930470, guid: eeeb2f577b272dd4b935c9828ba2ede7, type: 3}
+  barrierHealth: 100

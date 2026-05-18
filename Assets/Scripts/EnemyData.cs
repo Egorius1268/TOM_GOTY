@@ -10,5 +10,6 @@ public class EnemyData : ScriptableObject
     public int damageToPlayer = 5;
     public int moneyReward = 10;
     public GameObject prefab;
-    public Sprite sprite;
+    public Sprite Icon;
+    public Sprite worldSprite;
 }

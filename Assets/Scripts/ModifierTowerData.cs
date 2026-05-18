@@ -6,6 +6,7 @@ public class ModifierTowerData : ScriptableObject
     public new string name;
     public Sprite icon;
     public Sprite worldSprite;
+    public Sprite rangeCircleSprite; 
     public int cost;
     
     [Header("Modifier Settings")]

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fd1c042532057c4fb74e7dec40caf68, type: 3}
   m_Name: FreezeModifier
   m_EditorClassIdentifier: 
-  name: Frost Gate
+  name: "\u041C\u043E\u0440\u043E\u0437\u043D\u044B\u0435 \u0432\u0440\u0430\u0442\u0430"
   icon: {fileID: -5954229690154693420, guid: 8f85afb22b50c144c8a61f6704476753, type: 3}
   worldSprite: {fileID: 7482667652216324306, guid: a96582d8cd147094ca4d4680ffaeda07, type: 3}
   cost: 42

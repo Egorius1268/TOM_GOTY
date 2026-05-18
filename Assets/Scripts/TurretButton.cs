@@ -9,6 +9,7 @@ public class TurretButton : MonoBehaviour
     [SerializeField] private Image iconImage;
     [SerializeField] private TextMeshProUGUI priceText;
     [SerializeField] private GameObject selectionIndicator;
+    [SerializeField] private TextMeshProUGUI nameText; 
     private int price;
     private Button button;
 
@@ -22,13 +23,18 @@ public class TurretButton : MonoBehaviour
             selectionIndicator = foundIndicator.gameObject;
             selectionIndicator.SetActive(false);    
         }
-        
 
-        if (iconImage != null && turretData.icon != null)
-            iconImage.sprite = turretData.icon;
-
-        price = turretData.cost;
-        priceText.text = price.ToString();
+        if (turretData != null)
+        {
+            if (iconImage != null && turretData.icon != null)
+                iconImage.sprite = turretData.icon;
+            price = turretData.cost;
+            priceText.text = price.ToString();
+            if (nameText != null)
+            {
+                nameText.text = turretData.name;
+            }
+        }
     }
 
     private void Update()

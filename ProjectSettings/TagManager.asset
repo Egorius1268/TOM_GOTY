@@ -9,7 +9,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - CameraBorders
   - Water
   - UI
   - Buildable
@@ -18,8 +18,8 @@ TagManager:
   - Bullet
   - ModifierBuilding
   - BuffZone
-  - 
-  - 
+  - WallBarier
+  - Trap
   - 
   - 
   - 
